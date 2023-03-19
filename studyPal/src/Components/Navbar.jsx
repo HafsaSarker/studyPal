@@ -1,8 +1,12 @@
-import { BsRocketTakeoff } from 'react-icons/bs'
+import { BsRocket } from 'react-icons/bs'
 export default function Navbar(){
     return (
         <nav>
-            <h1>StudyPal <span><BsRocketTakeoff /></span></h1> 
+            <div className="nav-left">
+                <h1>StudyPal</h1> 
+                <span className='icon'><BsRocket /></span>
+            </div>
+            <button className='primary-button'>Log in</button>
         </nav>
     )
 }
