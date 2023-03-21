@@ -6,7 +6,6 @@ export default function Navbar(){
                 <h1>StudyPal</h1> 
                 <span className='icon'><BsRocket /></span>
             </div>
-            <button className='primary-button'>Log in</button>
         </nav>
     )
 }

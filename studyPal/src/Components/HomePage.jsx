@@ -1,8 +1,36 @@
-
+import { MdOutlineCreate, MdLaptopMac } from 'react-icons/md'
+import { SlNotebook } from 'react-icons/sl'
 export default function HomePage(){
     return (
-        <div>
-    
+        <div className="Home-Page">
+            <img className='bear' src="../../public/createAcc.gif" />
+            <div className="intro">
+                <h3>Create<span className="icon"><MdLaptopMac /></span></h3>
+
+                <h3>Study<span className="icon"><MdOutlineCreate /></span></h3>
+
+                <h3>Learn<span className="icon"><SlNotebook /></span></h3>
+            </div>
+            
+
+            <form className="signUp-form">
+                <h2>Create an account</h2>
+                <label>
+                   NAME 
+                   <input type="text" />
+                </label>
+                <label>
+                    EMAIL
+                    <input type="email" />
+                </label>
+                <label>
+                    PASSWORD
+                    <input type="password" />
+                </label>
+                
+                <button className='primary-button'>Sign up</button>
+            </form>
+            <p>Already have an accout? <span className='log-in-link'>Log in</span></p>        
         </div>
     )
 }
