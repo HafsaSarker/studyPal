@@ -4,11 +4,13 @@ import HomePage from './Components/HomePage'
 import './App.css'
 
 function App() {
-
+const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="App">
       <Navbar />
-      <HomePage />
+      <HomePage 
+        isLoggedIn={isLoggedIn} 
+        setIsLoggedIn={setIsLoggedIn}/>
     </div>
   )
 }
