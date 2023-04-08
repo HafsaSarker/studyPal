@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './SideNav.css'
 
 export default function SideNav() {
@@ -5,9 +6,15 @@ export default function SideNav() {
         <div className="sideNav">
             <nav className='nav--side'>
                 <ul>
-                    <li>Dashboard</li>
-                    <li>Create a set</li>
-                    <li>My Account</li>
+                    <Link to='/dashboard'>
+                        <li>Dashboard</li>
+                    </Link>
+                    <Link to='/createSet'>
+                        <li>Create a set</li>
+                    </Link>
+                    <Link>
+                        <li>My Account</li>
+                    </Link>
                 </ul>
             </nav>
         </div>
