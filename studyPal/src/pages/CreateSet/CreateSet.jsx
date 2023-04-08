@@ -1,5 +1,6 @@
-import './CreateSet.css'
 import SideNav from '../../Components/sideNav/SideNav'
+import './CreateSet.css'
+
 export default function CreateSet() {
     return (
         <div className="createSet">

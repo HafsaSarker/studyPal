@@ -1,0 +1,15 @@
+.createSet{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 100px;
+    color: #2E4012;
+}
+.createSet-main {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
