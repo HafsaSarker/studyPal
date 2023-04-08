@@ -8,7 +8,9 @@ export default function Dashboard () {
                 <SideNav />
             </div>
             <div className="dashboard-main">
-                dashboard things
+                <img src='./feedbackCat.png' />
+                <p className='primary-p'>oh shucks...you currently have no sets</p>
+                <button className='secondary-button'>Create one here</button>
             </div>
         </div>
     )

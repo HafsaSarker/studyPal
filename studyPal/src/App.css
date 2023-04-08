@@ -19,3 +19,19 @@ label{
     color:#F5F5F5;
     font-weight: 700;
 }
+
+.secondary-button {
+    margin-top: 10px;
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    background-color: #6cabe9; 
+    color:#F5F5F5;
+    transition: all .3s;
+}
+.secondary-button:hover {
+    background-color: #67a2dd;
+}
+.primary-p {
+    font-size: 30px;
+}
