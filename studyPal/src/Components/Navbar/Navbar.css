@@ -1,0 +1,25 @@
+nav {
+    background-color: #6cabe9;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 6px #d8d8d8;
+}
+
+.nav-left{
+    display: flex;
+    gap: 3px;
+}
+
+.nav-left h1 {
+    font-size: 2.3rem;
+    color: #ffffff;
+}
+
+.icon{
+    vertical-align: baseline;
+    font-size: 2.3rem;
+    color: black;
+}

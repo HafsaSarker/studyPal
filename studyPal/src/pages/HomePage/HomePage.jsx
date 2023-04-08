@@ -1,18 +1,20 @@
 import { MdOutlineCreate, MdLaptopMac } from 'react-icons/md'
 import { SlNotebook } from 'react-icons/sl'
+import './HomePage.css'
+
 export default function HomePage({isLoggedIn, setIsLoggedIn}){
     function changeForms(){
         setIsLoggedIn(prevState => !prevState);
     }
     return (
         <div className="Home-Page">
-            <img className='bear' src="../../public/createAcc.gif" />
+            <img className='bear' src="./createAcc.gif" />
             <div className="intro">
-                <h3>Create<span className="icon"><MdLaptopMac /></span></h3>
+                <h4>Create<span className="icon"><MdLaptopMac /></span></h4>
 
-                <h3>Study<span className="icon"><MdOutlineCreate /></span></h3>
+                <h4>Study<span className="icon"><MdOutlineCreate /></span></h4>
 
-                <h3>Learn<span className="icon"><SlNotebook /></span></h3>
+                <h4>Learn<span className="icon"><SlNotebook /></span></h4>
             </div>
             
             { isLoggedIn ? 

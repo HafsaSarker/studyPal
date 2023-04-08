@@ -1,4 +1,5 @@
 import { BsRocket } from 'react-icons/bs'
+import './Navbar.css'
 export default function Navbar(){
     return (
         <nav>
