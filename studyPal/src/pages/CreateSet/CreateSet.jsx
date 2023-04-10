@@ -22,21 +22,29 @@ export default function CreateSet() {
                             
                         />
                     </label>
-                    <label>
-                        1: 
-                        <label>
-                            Term:
-                            <input type="text" />
-                        </label>
+                    <div className="card-info">
+                        {/* card number */}
+                        <p>1</p> 
+                        
+                        <div className='card-sides-input'>
+                            <label>
+                                Term:
+                                <textarea type="text" />
+                            </label>
 
-                        <label>
-                            Definition:
-                            <input type="text" />
-                        </label>
-                    </label>
+                            <label>
+                                Definition:
+                                <textarea type="text" 
+                                />
+                            </label>
+                        </div>
+                    </div>
+                    
+
+                   
                     <div className="create-form-btn-container">
-                        <button type='button'>Add a card</button>
-                        <button type='submit'>create</button>
+                        <button type='button' className='add-card-btn'>Add a card</button>
+                        <button type='submit' className='green-btn'>create</button>
                     </div>
                     
                 </form>
