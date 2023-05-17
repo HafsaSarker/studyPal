@@ -14,9 +14,7 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
   return (
-    <div className="App">
-      <Navbar />
-    
+    <div className="App">    
       <Routes>
         <Route path='/' element={<MasterLayout />}>
 
