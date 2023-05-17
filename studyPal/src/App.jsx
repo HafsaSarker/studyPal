@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Routes, Route } from "react-router-dom";
-import Navbar from './Components/Navbar/Navbar';
-import HomePage from './pages/HomePage/HomePage';
+import AuthModal from './pages/Auth/AuthModal';
 import Dashboard from './pages/Dashboard/Dashboard';
 
 import MasterLayout from './Routes/MasterLayout/MasterLayout';
@@ -10,7 +9,7 @@ import './App.css'
 import CreateSet from './pages/CreateSet/CreateSet';
 
 function App() {
-const [isLoggedIn, setIsLoggedIn] = useState(false);
+const [logIn, setLogIn] = useState(true);
 
 
   return (
@@ -19,9 +18,9 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
         <Route path='/' element={<MasterLayout />}>
 
           <Route index element={
-            <HomePage 
-              isLoggedIn={isLoggedIn} 
-              setIsLoggedIn={setIsLoggedIn}
+            <AuthModal 
+              logIn={logIn} 
+              setLogIn={setLogIn}
             />}
           />
 

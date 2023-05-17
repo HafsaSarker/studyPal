@@ -1,10 +1,10 @@
 import { MdOutlineCreate, MdLaptopMac } from 'react-icons/md'
 import { SlNotebook } from 'react-icons/sl'
-import './HomePage.css'
+import './AuthModal.css'
 
-export default function HomePage({isLoggedIn, setIsLoggedIn}){
+export default function HomePage({logIn, setLogIn}){
     function changeForms(){
-        setIsLoggedIn(prevState => !prevState);
+        setLogIn(prevState => !prevState);
     }
     return (
         <div className="Home-Page">
@@ -17,7 +17,7 @@ export default function HomePage({isLoggedIn, setIsLoggedIn}){
                 <h4>Learn<span className="icon"><SlNotebook /></span></h4>
             </div>
             
-            { isLoggedIn ? 
+            { logIn ? 
             (
                 <form className='logIn-form'>
                     <h2>Welcome back!</h2>
@@ -53,7 +53,7 @@ export default function HomePage({isLoggedIn, setIsLoggedIn}){
                 </form>
             )
             }
-            { isLoggedIn ? (
+            { logIn ? (
                 <p>New here? <span className='log-in-link' onClick={changeForms}>Create account</span></p> 
             ) : (
                 <p>Already have an account? <span className='log-in-link' onClick={changeForms}>Log in</span></p>  
