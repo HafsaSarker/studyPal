@@ -5,16 +5,24 @@
     margin-top: 100px;
     color: #2E4012;
 }
+
 .dashboard-main {
     width: 100%;
-    margin-top: 50px;
+    margin: 50px 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.dashboard-main > img {
+.empty-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-dashboard > img {
     width: 60px;
     height: 60px;
 }
