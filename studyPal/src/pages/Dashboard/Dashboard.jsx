@@ -32,7 +32,6 @@ export default function Dashboard () {
                             <button className='secondary-button'>Create one here</button>
                         </Link>
                     </div>
-                    
                 )}
                 
                 
