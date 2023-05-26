@@ -1,3 +1,5 @@
+// a place to 'read' all sets
+
 import { Link } from 'react-router-dom'
 import SideNav from '../../Components/sideNav/SideNav'
 import tempData from '../../../tempData'
