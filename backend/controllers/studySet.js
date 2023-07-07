@@ -1,23 +1,57 @@
+const StudySet = require('../models/StudySet')
 const ash = require('express-async-handler')
 
 const getAllSets = ash( async(req, res) => {
-    res.status(200).json({ msg: "get all sets" })
+    const allSets = await StudySet.find({})
+    res.status(200).json({ allSets })
 }) 
 
 const getOneSet = ash( async(req, res) => {
-    res.status(200).json({ msg: "get one set" })
+    const {id} = req.params
+    const studySet = await StudySet.findOne({_id:id})
+
+    if(!studySet){
+        return res.status(404).json({msg: `No study set with id: ${id}`})
+    }
+
+    res.status(200).json({ studySet })
 })
 
 const createSet = ash( async(req, res) => {
-    res.status(200).json({ msg: "create all sets" })
+    const newStudySet = await StudySet.create(req.body)
+
+    res.status(200).json({ newStudySet })
 })
 
 const updateSet = ash( async(req, res) => {
-    res.status(200).json({ msg: "update a set" })
+    const {id} = req.params
+
+    const studySet = await StudySet.findById(id)
+
+    if(!studySet){
+        return res.status(404).json({message: `No study set with id: ${id}`})
+    }
+
+    const updatedStudySet = await StudySet.findByIdAndUpdate({_id:id}, req.body, {
+        new: true,
+        runValidators: true
+    })
+
+    res.status(200).json({ updatedStudySet })
 })
 
 const deleteSet = ash( async(req, res) => {
-    res.status(200).json({ msg: "delete a set" })
+    const {id} = req.params
+
+    const studySet = await StudySet.findById(id)
+
+    if(!studySet){
+        return res.status(404).json({message: `No study set with id: ${id}`})
+    }
+
+    await StudySet.findOneAndDelete({_id:id})
+
+    res.status(200).json({ success: 'true' })
 })
 
 module.exports = {
