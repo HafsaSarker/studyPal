@@ -24,7 +24,7 @@ const [logIn, setLogIn] = useState(true);
           />
           <Route path='/dashboard' element={<Dashboard />}/>
           <Route path='/createSet' element={<CreateSet />}/>
-          <Route path='/editSet' element={<EditSet />}/>
+          <Route path='/editSet/:id' element={<EditSet />}/>
         </Route>
       </Routes>
     </div>

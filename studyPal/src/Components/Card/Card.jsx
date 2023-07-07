@@ -1,15 +1,21 @@
 import {CiEdit} from 'react-icons/ci'
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import './Card.css'
 
-export default function Card({setTitle, img, createdAt}) {
+export default function Card({setTitle, img, createdAt, id}) {
     const createdAgo = moment(new Date(createdAt)).fromNow();
     return (
         <div className="card">
             <div className="set-info">
                 <p>created {createdAgo}</p>
                  <div className="update-icons">
-                    <span className="icon-edit"><CiEdit/></span>
+                    <Link to={`/editSet/${id}`}>
+                        <span className="icon-edit">
+                            <CiEdit/>
+                        </span>
+                    </Link>
+                    
                 </div>
             </div>
            

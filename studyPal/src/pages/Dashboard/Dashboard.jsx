@@ -42,7 +42,7 @@ export default function Dashboard () {
                             setTitle={item.setTitle}
                             img={item.img}
                             createdAt={item.createdAt}
-
+                            id={item._id}
                         />
                         )
                     }                     
