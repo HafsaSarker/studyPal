@@ -2,8 +2,17 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-top: 100px;
+
     color: #2E4012;
+}
+
+.side-nav {
+    margin-top: 100px;
+}
+
+.dashbordTitle {
+    margin-bottom: 50px;
+    text-align: center;
 }
 
 .dashboard-main {
@@ -13,6 +22,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.populated-dashboard {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
 }
 
 .empty-dashboard {

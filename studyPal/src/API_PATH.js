@@ -1,0 +1,1 @@
+export const path = "http://localhost:3001/api/v1/studySets"
