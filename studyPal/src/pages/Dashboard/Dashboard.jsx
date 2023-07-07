@@ -29,7 +29,8 @@ export default function Dashboard () {
             </div>
             
             <div className="dashboard-main">
-                <h2 className='dashbordTitle'>click on a set to start studying!</h2>
+                { studySets.length > 1 &&  
+                <h2 className='dashbordTitle'>click on a set to start studying!</h2>}
 
                 {studySets && studySets.length > 1 ? 
                 (   
