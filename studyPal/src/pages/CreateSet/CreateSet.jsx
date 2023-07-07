@@ -1,7 +1,69 @@
+import { useState } from 'react'
 import SideNav from '../../Components/sideNav/SideNav'
 import './CreateSet.css'
 
 export default function CreateSet() {
+    const [formData, setFormData] = useState({
+        setTitle:'',
+        setDescr:'',
+        img:'',
+        flashCards: []
+    })
+
+    const cardsArray = [{
+        cardNum: 1,
+        term: '',
+        definition: ''
+    }]
+
+    const [cards, setCards] = useState(cardsArray)
+
+    const addCardInput = () => {
+        setCards(prev => {
+            const lastCardNum = prev[prev.length - 1].cardNum;
+            return [
+              ...prev,
+            {
+                term: "",
+                definition: "",
+                cardNum: lastCardNum + 1
+            }
+            ]
+        })
+    }
+
+    //handles changes in formData ONLY
+    const handleFormChange = (e) => {
+        setFormData((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }))
+    }
+    
+    const handleCardChange = (e) => {
+        e.preventDefault()
+
+        const {name, value, id} = e.target;
+        
+        setCards(prev => {
+            const newCardArr = prev.slice()
+            name === 'term' ?  
+            newCardArr[id].term = value 
+            : newCardArr[id].definition = value
+
+            return newCardArr
+        })
+    }
+
+    const createStudySet = (e) => {
+        e.preventDefault()
+        
+        //add flashcard arr to form data
+        formData.flashCards.push(cards)
+
+        console.log(formData)
+    }
+
     return (
         <div className="createSet">
             <div className="side-nav">
@@ -9,41 +71,67 @@ export default function CreateSet() {
             </div>
             <div className="createSet-main">
                 <p className='primary-p'>create a set</p>
-                <form className='create-set-form'>
+                <form className='create-set-form' onSubmit={createStudySet}>
                     <label>
                         Study set title:
                         <input 
                             type='text'
+                            name='setTitle'
+                            onChange={handleFormChange}
                         />
                     </label>
                     <label>
                         Description: 
                         <textarea 
-                            
+                            name='setDescr'
+                            onChange={handleFormChange}
                         />
                     </label>
-                    <div className="card-info">
-                        {/* card number */}
-                        <p>1</p> 
-                        
-                        <div className='card-sides-input'>
-                            <label>
-                                Term:
-                                <textarea type="text" />
-                            </label>
-
-                            <label>
-                                Definition:
-                                <textarea type="text" 
-                                />
-                            </label>
-                        </div>
-                    </div>
+                    <label>
+                        Image url: 
+                        <input
+                            type='text' 
+                            name='img'
+                            onChange={handleFormChange}
+                        />
+                    </label>
+                    {
+                        cards.map((item, i) => {
+                            return (
+                                <div className="card-info" key={i}>
+                                    <p>{i+1}</p>
+                                    <div className="card-sides-input">
+                                        <label>
+                                            Term:
+                                            <textarea 
+                                                type="text"
+                                                id={i}
+                                                name='term'
+                                                onChange={handleCardChange}
+                                                value={item.term}
+                                                // required
+                                            />
+                                        </label>
+                                        <label>
+                                            Definition:
+                                            <textarea 
+                                                id={i}
+                                                type="text" 
+                                                name='definition'
+                                                value={item.definition}
+                                                onChange={handleCardChange}
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                     
 
                    
                     <div className="create-form-btn-container">
-                        <button type='button' className='add-card-btn'>Add a card</button>
+                        <button type='button' onClick={addCardInput} className='add-card-btn'>Add a card</button>
                         <button type='submit' className='green-btn'>create</button>
                     </div>
                     
