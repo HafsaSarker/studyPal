@@ -18,9 +18,11 @@ const getOneSet = ash( async(req, res) => {
 })
 
 const createSet = ash( async(req, res) => {
-    const newStudySet = await StudySet.create(req.body)
-
-    res.status(200).json({ newStudySet })
+    //const newStudySet = await StudySet.create(req.body)
+    //const newStudySet = new StudySet({})
+    const {flashcards} = req.body;
+    //res.status(200).json({ newStudySet })
+    res.status(200).json({ flashcards })
 })
 
 const updateSet = ash( async(req, res) => {

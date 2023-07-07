@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { path } from '../../API_PATH'
 import SideNav from '../../Components/sideNav/SideNav'
 import './CreateSet.css'
+import { useNavigate } from 'react-router-dom'
 
 export default function CreateSet() {
+    const navigate =  useNavigate()
     const [formData, setFormData] = useState({
         setTitle:'',
         setDescr:'',
@@ -55,13 +59,19 @@ export default function CreateSet() {
         })
     }
 
-    const createStudySet = (e) => {
+    const createStudySet = async(e) => {
         e.preventDefault()
         
         //add flashcard arr to form data
         formData.flashCards.push(cards)
-
-        console.log(formData)
+        try {
+            const data = await axios.post(`${path}/createSet`, formData)
+            console.log(data);
+            //navigate('/dashboard')
+        } catch (error) {
+            console.log(error);
+        }
+        //console.log(formData)
     }
 
     return (
