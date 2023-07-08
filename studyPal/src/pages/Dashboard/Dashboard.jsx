@@ -29,10 +29,10 @@ export default function Dashboard () {
             </div>
             
             <div className="dashboard-main">
-                { studySets.length > 1 &&  
+                { studySets.length > 0 &&  
                 <h2 className='dashbordTitle'>click on a set to start studying!</h2>}
 
-                {studySets && studySets.length > 1 ? 
+                {studySets && studySets.length > 0 ? 
                 (   
                     <div className="populated-dashboard">
                     {

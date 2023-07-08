@@ -30,7 +30,7 @@ const SetSchema = new mongoose.Schema ({
         type: String,
         default: 'https://cdn.crispedge.com/afc58c.png'
     },
-    flashCards: []
+    flashCards: mongoose.Schema.Types.Mixed
 }, {
     timestamps: true
 })

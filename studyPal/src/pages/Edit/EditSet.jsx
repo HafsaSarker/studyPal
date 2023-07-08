@@ -1,22 +1,27 @@
-import SideNav from '../../Components/sideNav/SideNav'
-import { AiFillDelete } from 'react-icons/ai'
-import axios, { formToJSON } from 'axios'
-import { path } from '../../API_PATH'
-import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import './EditSet.css'
 import Spinner from '../../Components/spinner/Spinner'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { AiFillDelete } from 'react-icons/ai'
+import { path } from '../../API_PATH'
+import SideNav from '../../Components/sideNav/SideNav'
+import { useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import './EditSet.css'
 
 export default function EditSet() {
+    const navigate = useNavigate()
+
     const [formData, setFormData] = useState(null)
+    const [cards, setCards] = useState(null)
     const {id} = useParams()
 
     useEffect(() => {
         const fetchStudySet = async() =>{
             try {
                 const {data} = await axios.get(`${path}/${id}`)
-
                 setFormData(data.studySet)
+                setCards(data.studySet.flashCards[0])
+                return data.studySet
             } catch (error) {
                 console.log(error);
             }
@@ -25,100 +30,152 @@ export default function EditSet() {
         fetchStudySet()
     }, [])
 
-    const handleChange = (e) => {
+    const addCardInput = () => {
+        setCards(prev => {
+            const lastCardNum = prev[prev.length - 1].cardNum;
+            return [
+              ...prev,
+            {
+                term: "",
+                definition: "",
+                cardNum: lastCardNum + 1
+            }
+            ]
+        })
+    }
+
+    //handles changes in formData ONLY
+    const handleFormChange = (e) => {
         setFormData((prev) => ({
             ...prev,
             [e.target.name]: e.target.value
         }))
     }
-
-    const updateStudySet = (e) => {
+    
+    const handleCardChange = (e) => {
         e.preventDefault()
 
-        console.log(formData)
+        const {name, value, id} = e.target;
+        
+        setCards(prev => {
+            const newCardArr = prev.slice()
+            name === 'term' ?  
+            newCardArr[id].term = value 
+            : newCardArr[id].definition = value
+
+            return newCardArr
+        })
     }
 
-    //add an input box on click
-    const IncrementInputBox = () => {
-        console.log('adds a new input box on click');
+    const createStudySet = async(e) => {
+        e.preventDefault()
+        
+        //modify old flashcards data
+        formData.flashCards[0] = cards
+        
+        try {
+            await axios.patch(`${path}/${id}`, formData)
+
+            navigate('/dashboard')
+        } catch (error) {
+            console.log(error);
+        }
     }
+
+    const deleteCard = (e) => {
+        const newCardsArr = cards.filter((card) => card.cardNum !== Number(e.currentTarget.id))
+
+        setCards(newCardsArr)
+    }
+
     return (
         <div className="EditSet">
             <div className="side-nav">
                 <SideNav />
             </div>
-
             <div className="EditSet-main">
-                { formData ? (
+                {formData && cards !== null ? 
+                (   
                     <>
-                        <p className='primary-p'>edit: {formData.setTitle}</p>
-                        <form className='edit-set-form' onSubmit={updateStudySet}>
-                            <label>
-                                Study set title:
-                                <input 
-                                    type='text'
-                                    name='setTitle'
-                                    value={formData.setTitle}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                            <label>
-                                Description: 
-                                <textarea 
-                                    name='setDescr'
-                                    value={formData.setDescr}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                            {
-                                formData.flashCards.map((card)=>
-                                    <div className="card-info" key={card._id}>
-                                    <div className="card-info-top">
-                                        <p>{card.cardNum}</p>
-                                        <span className='icon-small'><AiFillDelete /></span>
-                                    </div>
-                                    
-                                    <div className='card-sides-input'>
-                                    <label>
-                                            Term:
-                                            <textarea type="text" 
-                                                value={card.term}
-                                                name='term'
-                                                onChange={handleChange}
-                                            />
-                                        </label>
-
-                                        <label>
-                                            Definition:
-                                            <textarea type="text" 
-                                                value={card.definition}
-                                                name='definition'
-                                                onChange={handleChange}
-                                            />
-                                        </label>
-                                    </div>
+                    <p className='primary-p'>Edit a set</p>
+                    <form className='edit-set-form' onSubmit={createStudySet}>
+                        <label>
+                            Study set title:
+                            <input 
+                                type='text'
+                                name='setTitle'
+                                value={formData.setTitle}
+                                onChange={handleFormChange}
+                            />
+                        </label>
+                        <label>
+                            Description: 
+                            <textarea 
+                                name='setDescr'
+                                value={formData.setDescr}
+                                onChange={handleFormChange}
+                            />
+                        </label>
+                        <label>
+                            Image url: 
+                            <input
+                                type='text' 
+                                name='img'
+                                onChange={handleFormChange}
+                            />
+                        </label>
+                        {
+                            cards.map((item, i) => {
+                                return (
+                                    <div className="card-info" key={i}>
+                                        <div className="card-info-top">
+                                            <p>{i+1}</p>
+                                            <button type='button' className='icon-small' onClick={deleteCard} id={item.cardNum}><AiFillDelete /></button>
+                                        </div>
+                                        <div className="card-sides-input">
+                                            <label>
+                                                Term:
+                                                <textarea 
+                                                    type="text"
+                                                    id={i}
+                                                    name='term'
+                                                    onChange={handleCardChange}
+                                                    value={item.term}
+                                                    // required
+                                                />
+                                            </label>
+                                            <label>
+                                                Definition:
+                                                <textarea 
+                                                    id={i}
+                                                    type="text" 
+                                                    name='definition'
+                                                    value={item.definition}
+                                                    onChange={handleCardChange}
+                                                />
+                                            </label>
+                                        </div>
                                     </div>
                                 )
-                            }
-                            
-                
+                            })
+                        }
+                        
+
+                    
                         <div className="create-form-btn-container">
-                            <button onClick={IncrementInputBox} type='button' className='add-card-btn'>Add a card</button>
-                            <div className="edit-action-btns">
-                                <button type='submit' 
-                                className='green-btn'>Update</button>
-                                <button type='button' className='green-btn'>Delete set</button>
-                            </div>  
+                            <button type='button' onClick={addCardInput} className='add-card-btn'>Add a card</button>
+                            <button type='submit' className='green-btn'>create</button>
                         </div>
-                        </form>
+                    </form>
                     </>
-                ):(
+                ):
+                (
                     <div className="spinner">
                         <Spinner />
                     </div>
                 )}
-                 
-            </div>
+                
+            </div>     
         </div>
     )
 }

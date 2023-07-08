@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { AiFillDelete } from 'react-icons/ai'
 import { path } from '../../API_PATH'
 import SideNav from '../../Components/sideNav/SideNav'
 import './CreateSet.css'
@@ -66,13 +67,23 @@ export default function CreateSet() {
         formData.flashCards.push(cards)
         
         try {
-            const data = await axios.post(`${path}/createSet`, formData)
+            await axios.post(`${path}/createSet`, formData)
 
             navigate('/dashboard')
         } catch (error) {
             console.log(error);
         }
     }
+
+    const deleteCard = (e) => {
+        console.log(typeof(e.currentTarget.id))
+
+        const newCardsArr = cards.filter((card) => card.cardNum !== Number(e.currentTarget.id))
+        console.log({cards});
+        console.log({newCardsArr});
+        setCards(newCardsArr)
+    }
+    //console.log(cards)
 
     return (
         <div className="createSet">
@@ -109,7 +120,10 @@ export default function CreateSet() {
                         cards.map((item, i) => {
                             return (
                                 <div className="card-info" key={i}>
-                                    <p>{i+1}</p>
+                                    <div className="card-info-top">
+                                        <p>{i+1}</p>
+                                        <button type='button' className='icon-small' onClick={deleteCard} id={item.cardNum}><AiFillDelete /></button>
+                                    </div>
                                     <div className="card-sides-input">
                                         <label>
                                             Term:

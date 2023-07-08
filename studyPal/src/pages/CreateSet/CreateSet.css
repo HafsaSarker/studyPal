@@ -103,3 +103,14 @@
 .add-card-btn:hover { 
     background-color: #b4c992;   
 }
+
+.icon-small {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color:#2E4012;
+    transition: all .3s;
+}
+.icon-small:hover {
+    color:#506e20;
+}
