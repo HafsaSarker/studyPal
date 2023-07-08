@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { path } from '../../API_PATH'
 import SideNav from '../../Components/sideNav/SideNav'
@@ -10,7 +10,7 @@ export default function CreateSet() {
     const [formData, setFormData] = useState({
         setTitle:'',
         setDescr:'',
-        img:'',
+        img: undefined,
         flashCards: []
     })
 
@@ -64,14 +64,14 @@ export default function CreateSet() {
         
         //add flashcard arr to form data
         formData.flashCards.push(cards)
+        
         try {
             const data = await axios.post(`${path}/createSet`, formData)
-            console.log(data);
-            //navigate('/dashboard')
+
+            navigate('/dashboard')
         } catch (error) {
             console.log(error);
         }
-        //console.log(formData)
     }
 
     return (
