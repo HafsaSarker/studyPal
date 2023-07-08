@@ -65,6 +65,10 @@ export default function CreateSet() {
         
         //add flashcard arr to form data
         formData.flashCards.push(cards)
+
+        if(formData.img == ''){
+            formData.img = undefined
+        }
         
         try {
             await axios.post(`${path}/createSet`, formData)
@@ -99,6 +103,7 @@ export default function CreateSet() {
                             type='text'
                             name='setTitle'
                             onChange={handleFormChange}
+                            required
                         />
                     </label>
                     <label>
@@ -106,6 +111,7 @@ export default function CreateSet() {
                         <textarea 
                             name='setDescr'
                             onChange={handleFormChange}
+                            required
                         />
                     </label>
                     <label>
@@ -133,7 +139,7 @@ export default function CreateSet() {
                                                 name='term'
                                                 onChange={handleCardChange}
                                                 value={item.term}
-                                                // required
+                                                required
                                             />
                                         </label>
                                         <label>
@@ -144,6 +150,7 @@ export default function CreateSet() {
                                                 name='definition'
                                                 value={item.definition}
                                                 onChange={handleCardChange}
+                                                required
                                             />
                                         </label>
                                     </div>

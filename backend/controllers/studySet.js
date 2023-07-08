@@ -32,6 +32,10 @@ const updateSet = ash( async(req, res) => {
         return res.status(404).json({message: `No study set with id: ${id}`})
     }
 
+    if(req.body.img === ''){
+        req.body.img = studySet.img
+    }
+
     const updatedStudySet = await StudySet.findByIdAndUpdate({_id:id}, req.body, {
         new: true,
         runValidators: true

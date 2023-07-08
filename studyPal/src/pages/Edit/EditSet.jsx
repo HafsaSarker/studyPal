@@ -52,6 +52,7 @@ export default function EditSet() {
         }))
     }
     
+    //changes in flashcards
     const handleCardChange = (e) => {
         e.preventDefault()
 
@@ -67,7 +68,7 @@ export default function EditSet() {
         })
     }
 
-    const createStudySet = async(e) => {
+    const updateStudySet = async(e) => {
         e.preventDefault()
         
         //modify old flashcards data
@@ -98,7 +99,7 @@ export default function EditSet() {
                 (   
                     <>
                     <p className='primary-p'>Edit a set</p>
-                    <form className='edit-set-form' onSubmit={createStudySet}>
+                    <form className='edit-set-form' onSubmit={updateStudySet}>
                         <label>
                             Study set title:
                             <input 
@@ -106,6 +107,7 @@ export default function EditSet() {
                                 name='setTitle'
                                 value={formData.setTitle}
                                 onChange={handleFormChange}
+                                required
                             />
                         </label>
                         <label>
@@ -114,6 +116,7 @@ export default function EditSet() {
                                 name='setDescr'
                                 value={formData.setDescr}
                                 onChange={handleFormChange}
+                                required
                             />
                         </label>
                         <label>
@@ -121,6 +124,7 @@ export default function EditSet() {
                             <input
                                 type='text' 
                                 name='img'
+                                value={formData.img}
                                 onChange={handleFormChange}
                             />
                         </label>
@@ -141,7 +145,7 @@ export default function EditSet() {
                                                     name='term'
                                                     onChange={handleCardChange}
                                                     value={item.term}
-                                                    // required
+                                                    required
                                                 />
                                             </label>
                                             <label>
@@ -152,6 +156,7 @@ export default function EditSet() {
                                                     name='definition'
                                                     value={item.definition}
                                                     onChange={handleCardChange}
+                                                    required
                                                 />
                                             </label>
                                         </div>
@@ -164,7 +169,11 @@ export default function EditSet() {
                     
                         <div className="create-form-btn-container">
                             <button type='button' onClick={addCardInput} className='add-card-btn'>Add a card</button>
-                            <button type='submit' className='green-btn'>create</button>
+                            <div className="form-actions-btn">
+                                <button type='submit' className='green-btn'>update</button>
+                                <button type='submit' className='green-btn'>delete</button>
+                            </div>
+                            
                         </div>
                     </form>
                     </>

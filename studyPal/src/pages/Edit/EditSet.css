@@ -130,3 +130,8 @@
 .icon-small:hover {
     color:#506e20;
 }
+
+.form-actions-btn {
+    display: flex;
+    gap: 10px;
+}
