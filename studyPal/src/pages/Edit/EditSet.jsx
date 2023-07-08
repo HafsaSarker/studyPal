@@ -7,10 +7,17 @@ import SideNav from '../../Components/sideNav/SideNav'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
+import { useSelector, useDispatch } from 'react-redux'
+import { setIsEdited, setIsDeleted } from '../../features/notification/notifSlice'
 import './EditSet.css'
 
 export default function EditSet() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    //to send toast alerts back in dashboard after navigate
+    // const editState = useSelector((state) => state.notif.isEdited)
+    // const deleteState = useSelector((state) => state.notif.isDeleted) 
 
     const [formData, setFormData] = useState(null)
     const [cards, setCards] = useState(null)
@@ -77,6 +84,9 @@ export default function EditSet() {
         
         try {
             await axios.patch(`${path}/${id}`, formData)
+
+            dispatch(setIsEdited())
+
             navigate('/dashboard')
         } catch (error) {
             console.log(error);
@@ -95,8 +105,45 @@ export default function EditSet() {
         toast.success(`${e.currentTarget.value} deleted`)
     }
 
+    const alertUserForDelete = (e) => {
+        e.preventDefault() 
+
+        toast((t) => (
+            <span>
+              <b>delete</b> {e.target.id}?
+              <button onClick={() => 
+                    {
+                        deleteStudySet()
+                        toast.dismiss(t.id) 
+                    }}>
+                Yes
+              </button>
+              <button onClick={() => toast.dismiss(t.id)}>
+                No
+              </button>
+            </span>
+        ), {autoClose: false,  closeOnClick: false});
+
+    }
+
+    //delete whole set
+    const deleteStudySet = async() => {
+        try {
+            await axios.delete(`${path}/${id}`)
+            
+            //set isDeleted state to alert user in dashboard
+            dispatch(setIsDeleted())
+
+            navigate('/dashboard')
+        } catch (error) {
+            console.log(error);
+        }
+    } 
+
+
     return (
         <div className="EditSet">
+            <ToastContainer />
             <div className="side-nav">
                 <SideNav />
             </div>
@@ -171,13 +218,11 @@ export default function EditSet() {
                             })
                         }
                         
-
-                    
                         <div className="create-form-btn-container">
                             <button type='button' onClick={addCardInput} className='add-card-btn'>Add a card</button>
                             <div className="form-actions-btn">
                                 <button type='submit' className='green-btn'>update</button>
-                                <button type='submit' className='green-btn'>delete</button>
+                                <button type='submit' className='green-btn' id={formData.setTitle} onClick={alertUserForDelete}>delete</button>
                             </div>
                             
                         </div>
@@ -191,7 +236,6 @@ export default function EditSet() {
                 )}
                 
             </div>     
-            <ToastContainer />
         </div>
     )
 }

@@ -4,10 +4,39 @@ import axios from 'axios'
 import { path } from '../../API_PATH'
 import Card from '../../Components/Card/Card'
 import './Dashboard.css'
+import { toast, ToastContainer } from 'react-toastify'
 import { useEffect, useState } from 'react'
+import { setIsCreated, setIsDeleted, setIsEdited, reset } from '../../features/notification/notifSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import _ from 'underscore' 
 
 export default function Dashboard () {
     const [studySets, setStudySets] = useState([])
+    const dispatch = useDispatch()
+
+    const isEditState = useSelector((state) => state.notif.isEdited, _.isEqual)
+    const isDeleteState = useSelector((state) => state.notif.isDeleted) 
+    const resetState = useSelector((state) => state.notif.reset)
+    const isCreateState = useSelector((state) => state.notif.isCreateState)
+ 
+
+    const sendNotif = () => {
+        console.log(isEditState);
+        // for (var run = 0; run < 1; run++) {
+        //     if(isEditState){
+        //         console.log(isEditState);
+        //         toast.success('Successfully edited')
+        //     }
+        // }
+        //dispatch(reset())
+        // if(isEditState){
+        //     toast.success('Successfully edited')
+           
+        // }
+        //dispatch(reset())
+        
+    }   
+    sendNotif()
 
     useEffect(() => {
         const fetchAllSets = async() => {
@@ -24,6 +53,7 @@ export default function Dashboard () {
 
     return (
         <div className='dashboard'>
+            <ToastContainer />
             <div className="side-nav">
                 <SideNav />
             </div>
