@@ -6,6 +6,7 @@ import { path } from '../../API_PATH'
 import SideNav from '../../Components/sideNav/SideNav'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify'
 import './EditSet.css'
 
 export default function EditSet() {
@@ -76,7 +77,6 @@ export default function EditSet() {
         
         try {
             await axios.patch(`${path}/${id}`, formData)
-
             navigate('/dashboard')
         } catch (error) {
             console.log(error);
@@ -84,9 +84,15 @@ export default function EditSet() {
     }
 
     const deleteCard = (e) => {
+        if(cards.length === 1){
+            return toast.error('Must provide at least one term')
+        }
+
         const newCardsArr = cards.filter((card) => card.cardNum !== Number(e.currentTarget.id))
 
         setCards(newCardsArr)
+
+        toast.success(`${e.currentTarget.value} deleted`)
     }
 
     return (
@@ -134,7 +140,7 @@ export default function EditSet() {
                                     <div className="card-info" key={i}>
                                         <div className="card-info-top">
                                             <p>{i+1}</p>
-                                            <button type='button' className='icon-small' onClick={deleteCard} id={item.cardNum}><AiFillDelete /></button>
+                                            <button type='button' className='icon-small' onClick={deleteCard} value={item.term} id={item.cardNum}><AiFillDelete /></button>
                                         </div>
                                         <div className="card-sides-input">
                                             <label>
@@ -185,6 +191,7 @@ export default function EditSet() {
                 )}
                 
             </div>     
+            <ToastContainer />
         </div>
     )
 }

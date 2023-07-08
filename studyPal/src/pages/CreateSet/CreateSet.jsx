@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';import { useState } from 'react'
 import axios from 'axios'
 import { AiFillDelete } from 'react-icons/ai'
 import { path } from '../../API_PATH'
 import SideNav from '../../Components/sideNav/SideNav'
-import './CreateSet.css'
 import { useNavigate } from 'react-router-dom'
+import './CreateSet.css'
 
 export default function CreateSet() {
     const navigate =  useNavigate()
@@ -80,14 +81,15 @@ export default function CreateSet() {
     }
 
     const deleteCard = (e) => {
-        console.log(typeof(e.currentTarget.id))
+        if(cards.length === 1){
+            return toast.error('Must provide at least one term')
+        }
 
         const newCardsArr = cards.filter((card) => card.cardNum !== Number(e.currentTarget.id))
-        console.log({cards});
-        console.log({newCardsArr});
         setCards(newCardsArr)
+
+        toast.success(`${e.currentTarget.value} deleted`)
     }
-    //console.log(cards)
 
     return (
         <div className="createSet">
@@ -96,6 +98,7 @@ export default function CreateSet() {
             </div>
             <div className="createSet-main">
                 <p className='primary-p'>create a set</p>
+               
                 <form className='create-set-form' onSubmit={createStudySet}>
                     <label>
                         Study set title:
@@ -128,7 +131,7 @@ export default function CreateSet() {
                                 <div className="card-info" key={i}>
                                     <div className="card-info-top">
                                         <p>{i+1}</p>
-                                        <button type='button' className='icon-small' onClick={deleteCard} id={item.cardNum}><AiFillDelete /></button>
+                                        <button type='button' className='icon-small' onClick={deleteCard} id={item.cardNum} value={item.term}><AiFillDelete /></button>
                                     </div>
                                     <div className="card-sides-input">
                                         <label>
@@ -167,7 +170,8 @@ export default function CreateSet() {
                     </div>
                     
                 </form>
-            </div>     
+            </div> 
+            <ToastContainer />    
         </div>
     )
 }
