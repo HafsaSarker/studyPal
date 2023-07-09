@@ -8,17 +8,16 @@ import { toast, ToastContainer } from 'react-toastify'
 import { useEffect, useState } from 'react'
 import { reset } from '../../features/notification/notifSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import Spinner from '../../Components/spinner/Spinner'
 
 export default function Dashboard () {
-    const [studySets, setStudySets] = useState([])
+    const [studySets, setStudySets] = useState(null)
     const dispatch = useDispatch()
 
     const isEditState = useSelector((state) => state.notif.isEdited)
     const isDeleteState = useSelector((state) => state.notif.isDeleted) 
     const isCreateState = useSelector((state) => state.notif.isCreated)
 
-   
-    
     useEffect(() => {
         const fetchAllSets = async() => {
             try {
@@ -62,26 +61,35 @@ export default function Dashboard () {
             </div>
             
             <div className="dashboard-main">
-                { studySets.length > 0 &&  
-                <h2 className='dashbordTitle'>click on a set to start studying!</h2>}
+                {
+                    !studySets && 
+                    <div className="spinner">
+                    <Spinner />
+                    </div>
+                }
 
-                {studySets && studySets.length > 0 ? 
+                {(studySets && studySets.length > 0) &&
                 (   
-                    <div className="populated-dashboard">
-                    {
-                        studySets.map((item, index) =>
-                        <Card 
-                            key={index}
-                            setTitle={item.setTitle}
-                            img={item.img}
-                            createdAt={item.createdAt}
-                            id={item._id}
-                        />
-                        )
-                    }                     
-                    </div>        
-                ) :
-                (
+                    <>
+                        <h2 className='dashbordTitle'>click on a set to start studying!</h2>
+                        <div className="populated-dashboard">
+                        {
+                            studySets.map((item, index) =>
+                            <Card 
+                                key={index}
+                                setTitle={item.setTitle}
+                                img={item.img}
+                                createdAt={item.createdAt}
+                                id={item._id}
+                            />
+                        )}                     
+                        </div>  
+                    </>
+                         
+                )}
+
+                {
+                    (studySets && studySets.length < 1) &&
                     <div className="empty-dashboard">
                         <img src='./feedbackCat.png' />
                         <p className='primary-p'>oh shucks...you currently have no sets</p>
@@ -89,7 +97,7 @@ export default function Dashboard () {
                             <button className='secondary-button'>Create one here</button>
                         </Link>
                     </div>
-                )}
+                }
                 
                 
             </div>

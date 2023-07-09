@@ -1,1 +1,9 @@
-// a place to read an individual set by it's id 
+import './studySet.css'
+
+function StudySet() {
+  return (
+    <div>StudySet</div>
+  )
+}
+
+export default StudySet
