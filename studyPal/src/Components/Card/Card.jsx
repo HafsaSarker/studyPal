@@ -18,8 +18,11 @@ export default function Card({setTitle, img, createdAt, id}) {
                     
                 </div>
             </div>
-           
-            <img className='studySetImg' src={img} alt="Study set image" />
+
+            <Link to={`/studySet/${id}`}>
+                <img className='studySetImg' src={img} alt="Study set image" />
+            </Link>
+            
             <section className='card-content'>
                 <p className='setTitle'>{setTitle}</p>
             </section>

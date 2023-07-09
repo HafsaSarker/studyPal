@@ -6,6 +6,7 @@ import MasterLayout from './Routes/MasterLayout/MasterLayout';
 import CreateSet from './pages/CreateSet/CreateSet';
 import EditSet from './pages/Edit/EditSet';
 import './App.css'
+import StudySet from './pages/Study/StudySet';
 
 
 function App() {
@@ -25,6 +26,7 @@ const [logIn, setLogIn] = useState(true);
           <Route path='/dashboard' element={<Dashboard />}/>
           <Route path='/createSet' element={<CreateSet />}/>
           <Route path='/editSet/:id' element={<EditSet />}/>
+          <Route path='/studySet/:id' element={<StudySet />}/>
         </Route>
       </Routes>
     </div>
