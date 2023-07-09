@@ -1,19 +1,5 @@
 const mongoose = require('mongoose')
 
-const CardsSchema = new mongoose.Schema({
-    cardNum: Number,
-    term: {
-        type: String,
-        trim: true,
-        required: [true, 'Please provide a flashcard term']
-    },
-    definition: {
-        type: String,
-        trim: true,
-        required: [true, 'Please provide a definition for this term']
-    }
-})
-
 const SetSchema = new mongoose.Schema ({
     setTitle: {
         type: String,
