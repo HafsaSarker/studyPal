@@ -29,7 +29,7 @@ export default function StudySet () {
 
         fetchStudySet()
     },[])
-    console.log(studySet);
+
     function forward(){
         if(cardIndx >= (cards.length-1)){
           return;
