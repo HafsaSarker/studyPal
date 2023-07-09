@@ -6,38 +6,19 @@ import Card from '../../Components/Card/Card'
 import './Dashboard.css'
 import { toast, ToastContainer } from 'react-toastify'
 import { useEffect, useState } from 'react'
-import { setIsCreated, setIsDeleted, setIsEdited, reset } from '../../features/notification/notifSlice'
+import { reset } from '../../features/notification/notifSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import _ from 'underscore' 
 
 export default function Dashboard () {
     const [studySets, setStudySets] = useState([])
     const dispatch = useDispatch()
 
-    const isEditState = useSelector((state) => state.notif.isEdited, _.isEqual)
+    const isEditState = useSelector((state) => state.notif.isEdited)
     const isDeleteState = useSelector((state) => state.notif.isDeleted) 
-    const resetState = useSelector((state) => state.notif.reset)
-    const isCreateState = useSelector((state) => state.notif.isCreateState)
- 
+    const isCreateState = useSelector((state) => state.notif.isCreated)
 
-    const sendNotif = () => {
-        console.log(isEditState);
-        // for (var run = 0; run < 1; run++) {
-        //     if(isEditState){
-        //         console.log(isEditState);
-        //         toast.success('Successfully edited')
-        //     }
-        // }
-        //dispatch(reset())
-        // if(isEditState){
-        //     toast.success('Successfully edited')
-           
-        // }
-        //dispatch(reset())
-        
-    }   
-    sendNotif()
-
+   
+    
     useEffect(() => {
         const fetchAllSets = async() => {
             try {
@@ -50,6 +31,28 @@ export default function Dashboard () {
 
         fetchAllSets()
     },[])
+
+    useEffect(() => {
+        const sendNotif = () => {
+            let message = ''
+
+            if(isEditState){
+                message = 'successfully updated'
+            }
+            else if(isDeleteState){
+                message = 'successfully deleted'
+            }
+            else if(isCreateState){
+                message = 'successfully created'
+            }
+            else{
+                message = null
+            }
+            message ? toast.success(message) : null
+        }     
+        sendNotif()
+        dispatch(reset())
+    },[isEditState, isDeleteState, isCreateState, reset])
 
     return (
         <div className='dashboard'>

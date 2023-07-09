@@ -135,3 +135,20 @@
     display: flex;
     gap: 10px;
 }
+
+.toast-span {
+    display: flex;
+    justify-content: center;
+}
+
+.toast-btn {
+    width: 40px;
+    margin: 0px 5px;
+}
+
+.toast-span span b {
+    color: #DE5D83;
+}
+.toast-span span {
+    margin-right: 25px;
+}

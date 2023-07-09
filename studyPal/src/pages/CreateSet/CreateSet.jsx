@@ -5,10 +5,15 @@ import { AiFillDelete } from 'react-icons/ai'
 import { path } from '../../API_PATH'
 import SideNav from '../../Components/sideNav/SideNav'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from "react-redux";
+import { setIsCreated } from '../../features/notification/notifSlice'
 import './CreateSet.css'
+
 
 export default function CreateSet() {
     const navigate =  useNavigate()
+    const dispatch = useDispatch()
+
     const [formData, setFormData] = useState({
         setTitle:'',
         setDescr:'',
@@ -73,7 +78,7 @@ export default function CreateSet() {
         
         try {
             await axios.post(`${path}/createSet`, formData)
-
+            dispatch(setIsCreated())
             navigate('/dashboard')
         } catch (error) {
             console.log(error);
@@ -86,6 +91,7 @@ export default function CreateSet() {
         }
 
         const newCardsArr = cards.filter((card) => card.cardNum !== Number(e.currentTarget.id))
+
         setCards(newCardsArr)
 
         toast.success(`${e.currentTarget.value} deleted`)

@@ -7,17 +7,13 @@ import SideNav from '../../Components/sideNav/SideNav'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setIsEdited, setIsDeleted } from '../../features/notification/notifSlice'
 import './EditSet.css'
 
 export default function EditSet() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
-    //to send toast alerts back in dashboard after navigate
-    // const editState = useSelector((state) => state.notif.isEdited)
-    // const deleteState = useSelector((state) => state.notif.isDeleted) 
 
     const [formData, setFormData] = useState(null)
     const [cards, setCards] = useState(null)
@@ -27,8 +23,10 @@ export default function EditSet() {
         const fetchStudySet = async() =>{
             try {
                 const {data} = await axios.get(`${path}/${id}`)
+            
                 setFormData(data.studySet)
                 setCards(data.studySet.flashCards[0])
+                
                 return data.studySet
             } catch (error) {
                 console.log(error);
@@ -84,9 +82,7 @@ export default function EditSet() {
         
         try {
             await axios.patch(`${path}/${id}`, formData)
-
             dispatch(setIsEdited())
-
             navigate('/dashboard')
         } catch (error) {
             console.log(error);
@@ -109,16 +105,19 @@ export default function EditSet() {
         e.preventDefault() 
 
         toast((t) => (
-            <span>
-              <b>delete</b> {e.target.id}?
-              <button onClick={() => 
+            <span className='toast-span'>
+                <span> 
+                    <b>delete</b> {e.target.id}?
+                </span>
+
+              <button className='toast-btn' onClick={() => 
                     {
                         deleteStudySet()
                         toast.dismiss(t.id) 
                     }}>
                 Yes
               </button>
-              <button onClick={() => toast.dismiss(t.id)}>
+              <button className='toast-btn' onClick={() => toast.dismiss(t.id)}>
                 No
               </button>
             </span>
