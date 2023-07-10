@@ -30,6 +30,7 @@ button {
     border-bottom: 3px solid #1a66b3;
     color:#F5F5F5;
     font-weight: 700;
+    transition: all .3s;
 }
 
 .secondary-button {
@@ -41,8 +42,9 @@ button {
     color:#F5F5F5;
     transition: all .3s;
 }
+.primary-button:hover,
 .secondary-button:hover {
-    background-color: #67a2dd;
+    background-color: #79b5f1;
 }
 
 .green-btn {
