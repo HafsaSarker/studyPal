@@ -1,6 +1,8 @@
 import { MdOutlineCreate, MdLaptopMac } from 'react-icons/md'
 import { SlNotebook } from 'react-icons/sl'
 import './AuthModal.css'
+import Register from './register/Register';
+import Login from './login/Login';
 
 export default function HomePage({logIn, setLogIn}){
     function changeForms(){
@@ -19,38 +21,10 @@ export default function HomePage({logIn, setLogIn}){
             
             { logIn ? 
             (
-                <form className='logIn-form'>
-                    <h2>Welcome back!</h2>
-                    <label>
-                        EMAIL
-                        <input type="email" />
-                    </label>
-                    <label>
-                        PASSWORD
-                        <input type="password" />
-                    </label>
-                    
-                    <button className='primary-button'>Log in</button>
-                </form>
+                <Login />
             ) : 
             (   
-                <form className="signUp-form">
-                    <h2>Create an account</h2>
-                    <label>
-                    NAME 
-                    <input type="text" />
-                    </label>
-                    <label>
-                        EMAIL
-                        <input type="email" />
-                    </label>
-                    <label>
-                        PASSWORD
-                        <input type="password" />
-                    </label>
-                    
-                    <button className='primary-button'>Sign up</button>
-                </form>
+                <Register />
             )
             }
             { logIn ? (
