@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 
-const studySetRouter = require('./routes/studySet')
 const connectDB = require('./db/connect')
 require('dotenv').config()
 
@@ -16,7 +15,8 @@ app.get('/test', (req, res) => {
 })
 
 //routes
-app.use('/api/v1/studySets', studySetRouter)
+app.use('/api/v1/studySets', require('./routes/studySet'))
+app.use('/api/v1/users', require('./routes/user'))
 
 const port = 3001
 

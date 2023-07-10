@@ -1,8 +1,10 @@
 const StudySet = require('../models/StudySet')
+const User = require('../models/User')
+
 const ash = require('express-async-handler')
 
 const getAllSets = ash( async(req, res) => {
-    const allSets = await StudySet.find({})
+    const allSets = await StudySet.find({ user:req.user.id })
     res.status(200).json({ allSets })
 }) 
 
@@ -18,7 +20,20 @@ const getOneSet = ash( async(req, res) => {
 })
 
 const createSet = ash( async(req, res) => {
-    const newStudySet = await StudySet.create(req.body)
+    const {setTitle, setDescr, img, flashCards} = req.body
+
+    if(!setTitle || !setDescr || !flashCards){
+        res.status(400)
+        throw new Error('Please add all required fields')
+    }
+
+    const newStudySet = await StudySet.create({
+        setTitle, 
+        setDescr, 
+        img, 
+        flashCards,
+        user:req.user.id 
+    })
     
     res.status(200).json({ newStudySet })
 })
@@ -30,6 +45,19 @@ const updateSet = ash( async(req, res) => {
 
     if(!studySet){
         return res.status(404).json({message: `No study set with id: ${id}`})
+    }
+
+    const user = await User.findById(req.user.id)
+
+    if(!user){
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //check if logged in user is the one that created the studySet
+    if(studySet.user.toString() !== user.id){
+        res.status(401)
+        throw new Error('user not authorized')
     }
 
     if(req.body.img === ''){
@@ -51,6 +79,19 @@ const deleteSet = ash( async(req, res) => {
 
     if(!studySet){
         return res.status(404).json({message: `No study set with id: ${id}`})
+    }
+
+    const user = await User.findById(req.user.id)
+
+    if(!user){
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //check if logged in user is the one that created the studySet
+    if(studySet.user.toString() !== user.id){
+        res.status(401)
+        throw new Error('user not authorized')
     }
 
     await StudySet.findOneAndDelete({_id:id})

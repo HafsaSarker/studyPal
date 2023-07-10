@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
 
 const SetSchema = new mongoose.Schema ({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref:'User'
+    },
     setTitle: {
         type: String,
         trim: true,
@@ -16,7 +21,10 @@ const SetSchema = new mongoose.Schema ({
         type: String,
         default: 'https://cdn.crispedge.com/afc58c.png'
     },
-    flashCards: mongoose.Schema.Types.Mixed
+    flashCards: {
+        type: mongoose.Schema.Types.Mixed,
+        required: [true, 'Please provide at least one term and definition']
+    }
 }, {
     timestamps: true
 })
