@@ -47,15 +47,13 @@ const updateSet = ash( async(req, res) => {
         return res.status(404).json({message: `No study set with id: ${id}`})
     }
 
-    const user = await User.findById(req.user.id)
-
-    if(!user){
+    if(!req.user){
         res.status(401)
         throw new Error('User not found')
     }
 
     //check if logged in user is the one that created the studySet
-    if(studySet.user.toString() !== user.id){
+    if(studySet.user.toString() !== req.user.id){
         res.status(401)
         throw new Error('user not authorized')
     }

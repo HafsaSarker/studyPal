@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SideNav from '../../Components/sideNav/SideNav'
 import axios from 'axios'
 import { path } from '../../API_PATH'
 import Card from '../../Components/Card/Card'
 import './Dashboard.css'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { useEffect, useState } from 'react'
 import { reset } from '../../features/notification/notifSlice'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,8 +12,18 @@ import Spinner from '../../Components/spinner/Spinner'
 
 export default function Dashboard () {
     const dispatch = useDispatch()
-    
-    const [studySets, setStudySets] = useState(null)
+    const navigate = useNavigate()
+
+    const { user } = useSelector((state) => state.auth)
+
+    //if not user, redirect them
+    useEffect(() => {
+        if(!user){
+            navigate('/')
+        }
+    }, [user, navigate])
+
+    const [studySets, setStudySets] = useState([])
 
     const { searchInput } = useSelector((state) => state.search)
 
@@ -32,7 +42,7 @@ export default function Dashboard () {
             }
         }
 
-        fetchAllSets()
+        //fetchAllSets()
     },[])
 
     useEffect(() => {
@@ -61,7 +71,6 @@ export default function Dashboard () {
 
     return (
         <div className='dashboard'>
-            <ToastContainer />
             <div className="side-nav">
                 <SideNav />
             </div>

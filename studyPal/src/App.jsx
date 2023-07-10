@@ -5,9 +5,10 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import MasterLayout from './Routes/MasterLayout/MasterLayout';
 import CreateSet from './pages/CreateSet/CreateSet';
 import EditSet from './pages/Edit/EditSet';
-import './App.css'
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 import StudySet from './pages/Study/StudySet';
-
+import './App.css'
 
 function App() {
 const [logIn, setLogIn] = useState(true);
@@ -29,6 +30,7 @@ const [logIn, setLogIn] = useState(true);
           <Route path='/studySet/:id' element={<StudySet />}/>
         </Route>
       </Routes>
+      <ToastContainer />
     </div>
   )
 }

@@ -6,7 +6,7 @@ import { path } from '../../API_PATH'
 import SideNav from '../../Components/sideNav/SideNav'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { setIsEdited, setIsDeleted } from '../../features/notification/notifSlice'
 import './EditSet.css'
@@ -142,7 +142,6 @@ export default function EditSet() {
 
     return (
         <div className="EditSet">
-            <ToastContainer />
             <div className="side-nav">
                 <SideNav />
             </div>

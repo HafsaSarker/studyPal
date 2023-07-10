@@ -1,5 +1,6 @@
-import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';import { useState } from 'react'
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react'
 import axios from 'axios'
 import { AiFillDelete } from 'react-icons/ai'
 import { path } from '../../API_PATH'
@@ -7,6 +8,7 @@ import SideNav from '../../Components/sideNav/SideNav'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { setIsCreated } from '../../features/notification/notifSlice'
+import { createStudySet } from '../../features/studySet/studySetSlice'
 import './CreateSet.css'
 
 
@@ -66,7 +68,8 @@ export default function CreateSet() {
         })
     }
 
-    const createStudySet = async(e) => {
+    //onsubmit
+    const createNewSet = async(e) => {
         e.preventDefault()
         
         //add flashcard arr to form data
@@ -75,14 +78,17 @@ export default function CreateSet() {
         if(formData.img == ''){
             formData.img = undefined
         }
-        
-        try {
-            await axios.post(`${path}/createSet`, formData)
-            dispatch(setIsCreated())
-            navigate('/dashboard')
-        } catch (error) {
-            console.log(error);
-        }
+
+        dispatch(createStudySet(formData))
+        dispatch(setIsCreated())
+        navigate('/dashboard')
+        // try {
+        //     await axios.post(`${path}/createSet`, formData)
+        //     dispatch(setIsCreated())
+        //     navigate('/dashboard')
+        // } catch (error) {
+        //     console.log(error);
+        // }
     }
 
     const deleteCard = (e) => {
@@ -105,7 +111,7 @@ export default function CreateSet() {
             <div className="createSet-main">
                 <p className='primary-p'>create a set</p>
                
-                <form className='create-set-form' onSubmit={createStudySet}>
+                <form className='create-set-form' onSubmit={createNewSet}>
                     <label>
                         Study set title:
                         <input 
@@ -176,8 +182,7 @@ export default function CreateSet() {
                     </div>
                     
                 </form>
-            </div> 
-            <ToastContainer />    
+            </div>  
         </div>
     )
 }
