@@ -11,13 +11,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../../Components/spinner/Spinner'
 
 export default function Dashboard () {
-    const [studySets, setStudySets] = useState(null)
     const dispatch = useDispatch()
+    
+    const [studySets, setStudySets] = useState(null)
 
+    const { searchInput } = useSelector((state) => state.search)
+
+    //for sending alerts/messages to user
     const isEditState = useSelector((state) => state.notif.isEdited)
     const isDeleteState = useSelector((state) => state.notif.isDeleted) 
     const isCreateState = useSelector((state) => state.notif.isCreated)
-
+   
     useEffect(() => {
         const fetchAllSets = async() => {
             try {
@@ -53,6 +57,8 @@ export default function Dashboard () {
         dispatch(reset())
     },[isEditState, isDeleteState, isCreateState, reset])
 
+    const filteredSets = (studySets && searchInput) && studySets.filter((item) => item.setTitle.toLowerCase().includes(searchInput.toLowerCase()))
+
     return (
         <div className='dashboard'>
             <ToastContainer />
@@ -72,8 +78,10 @@ export default function Dashboard () {
                 (   
                     <>
                         <h2 className='dashbordTitle'>click on a set to start studying!</h2>
+                        
                         <div className="populated-dashboard">
                         {
+                            !searchInput? (
                             studySets.map((item, index) =>
                             <Card 
                                 key={index}
@@ -82,7 +90,23 @@ export default function Dashboard () {
                                 createdAt={item.createdAt}
                                 id={item._id}
                             />
-                        )}                     
+                             
+                        )
+                        ):(
+                            filteredSets.length < 1 ? (
+                                <p>No result</p>
+                            ):(
+                                filteredSets.map((item, index) =>
+                                    <Card 
+                                        key={index}
+                                        setTitle={item.setTitle}
+                                        img={item.img}
+                                        createdAt={item.createdAt}
+                                        id={item._id}
+                                    />
+                                )
+                            )
+                        )}                  
                         </div>  
                     </>
                          
