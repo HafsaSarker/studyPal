@@ -12,7 +12,7 @@ export default function SideNav() {
                     <Link to='/createSet'>
                         <li>Create a set</li>
                     </Link>
-                    <Link>
+                    <Link to='/user/me'>
                         <li>My Account</li>
                     </Link>
                 </ul>

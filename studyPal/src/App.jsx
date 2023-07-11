@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import StudySet from './pages/Study/StudySet';
 import './App.css'
+import User from './pages/User/User';
 
 function App() {
 const [logIn, setLogIn] = useState(true);
@@ -28,6 +29,7 @@ const [logIn, setLogIn] = useState(true);
           <Route path='/createSet' element={<CreateSet />}/>
           <Route path='/editSet/:id' element={<EditSet />}/>
           <Route path='/studySet/:id' element={<StudySet />}/>
+          <Route path='/user/me' element={<User />}/>
         </Route>
       </Routes>
       <ToastContainer />
