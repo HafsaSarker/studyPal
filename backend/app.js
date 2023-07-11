@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+const { errorHandler } = require('./middleware/error')
+
 const connectDB = require('./db/connect')
 require('dotenv').config()
 
@@ -8,6 +10,7 @@ const cors = require('cors')
 
 app.use(cors())
 app.use(express.json())
+app.use(errorHandler)
 
 //test route
 app.get('/test', (req, res) => {
