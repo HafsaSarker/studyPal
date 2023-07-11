@@ -14,12 +14,12 @@
     ...because I am kind of poor hehe
 
 ###### Login/Signup
-<img src=".\login_register.gif" width='500' />
+<img src=".\studyPal\public\login_register.gif" width='500' />
 
 ###### Create a set 
-<img src=".\create.gif" width='500' />
+<img src=".\studyPal\public\demoGIFS\create.gif" width='500' />
 
 ###### Update a set 
-<img src=".\edit.gif" width='500' />
+<img src=".\studyPal\public\edit.gif" width='500' />
 
 
