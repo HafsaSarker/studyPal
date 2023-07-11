@@ -19,6 +19,9 @@
 ###### Create a set 
 <img src=".\studyPal\public\demoGIFS\create.gif" width='500' />
 
+###### Study a set 
+<img src=".\studyPal\public\demoGIFS\study.gif" width='500' />
+
 ###### Update a set 
 <img src=".\studyPal\public\demoGIFS\edit.gif" width='500' />
 
