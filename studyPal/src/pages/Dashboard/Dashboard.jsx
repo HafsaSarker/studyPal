@@ -6,7 +6,7 @@ import Card from '../../Components/Card/Card'
 import './Dashboard.css'
 import { toast } from 'react-toastify'
 import { useEffect, useState } from 'react'
-import { reset } from '../../features/notification/notifSlice'
+import { resetNotif } from '../../features/notification/notifSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../../Components/spinner/Spinner'
 
@@ -14,7 +14,7 @@ export default function Dashboard () {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const { token } = useSelector((state) => state.auth)
+    const { user } = useSelector((state) => state.auth)
 
     const [studySets, setStudySets] = useState(null)
 
@@ -29,10 +29,9 @@ export default function Dashboard () {
         const fetchAllSets = async() => {
             const config = {
                 headers: {
-                  Authorization: `Bearer ${token}`,
+                  Authorization: `Bearer ${user.token}`,
                 },
             }
-
             try {
                 const {data} = await axios.get(path, config)
                 setStudySets(data.allSets)
@@ -41,12 +40,13 @@ export default function Dashboard () {
             }
         }
 
-        if(!token){
+        if(!user){
             navigate('/')
         }else {
             fetchAllSets()
         }
-    },[])
+        fetchAllSets()
+    },[user, navigate])
 
     useEffect(() => {
         const sendNotif = () => {
@@ -67,8 +67,8 @@ export default function Dashboard () {
             message ? toast.success(message) : null
         }     
         sendNotif()
-        dispatch(reset())
-    },[isEditState, isDeleteState, isCreateState, reset])
+        dispatch(resetNotif())
+    },[isEditState, isDeleteState, isCreateState, resetNotif])
 
     const filteredSets = (studySets && searchInput) && studySets.filter((item) => item.setTitle.toLowerCase().includes(searchInput.toLowerCase()))
 

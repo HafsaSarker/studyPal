@@ -15,18 +15,20 @@ export default function EditSet() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const { token } = useSelector((state) => state.auth)
+    const { user } = useSelector((state) => state.auth)
     const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${user.token}`,
         },
     }
+
     const [formData, setFormData] = useState(null)
     const [cards, setCards] = useState(null)
     const {id} = useParams()
 
     useEffect(() => {
-        const fetchStudySet = async() =>{
+        const fetchStudySet = async() => {
+            
             try {
                 const {data} = await axios.get(`${path}/${id}`, config)
             
@@ -40,7 +42,7 @@ export default function EditSet() {
         }
 
         fetchStudySet()
-    }, [])
+    }, [user, navigate])
 
     const addCardInput = () => {
         setCards(prev => {

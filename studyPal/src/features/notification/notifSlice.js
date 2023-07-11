@@ -20,7 +20,7 @@ export const notifSlice = createSlice({
         setIsEdited: (state) => {
             state.isEdited = true
         },
-        reset: (state) => {
+        resetNotif: (state) => {
             state.isDeleted = false
             state.isCreated = false
             state.isEdited = false
@@ -29,7 +29,7 @@ export const notifSlice = createSlice({
 })
 
 //export actions
-export const { setIsCreated, setIsDeleted, setIsEdited, reset } = notifSlice.actions
+export const { setIsCreated, setIsDeleted, setIsEdited, resetNotif } = notifSlice.actions
 
 //export full reducers
 export default notifSlice.reducer

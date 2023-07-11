@@ -15,13 +15,13 @@ export default function StudySet () {
     const [studySet, setStudySet] = useState(null)
     const [cards, setCards] = useState(null)
     const [cardIndx, setCardIndx] = useState(0)
-    const { token } = useSelector((state) => state.auth)
+    const { user } = useSelector((state) => state.auth)
 
     useEffect(() => {
         const fetchStudySet = async() => {
             const config = {
                 headers: {
-                  Authorization: `Bearer ${token}`,
+                  Authorization: `Bearer ${user.token}`,
                 },
             }
 
@@ -36,7 +36,7 @@ export default function StudySet () {
         }
 
         fetchStudySet()
-    },[])
+    },[user])
 
     function forward(){
         if(cardIndx >= (cards.length-1)){
@@ -84,7 +84,7 @@ export default function StudySet () {
                                 <FlashCard
                                     term={cards[cardIndx].term}
                                     definition={cards[cardIndx].definition}
-                                    currCard={cards[cardIndx].cardNum}
+                                    currCard={cardIndx + 1}
                                     size={cards.length}
                                 />
                             }

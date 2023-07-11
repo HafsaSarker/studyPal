@@ -6,7 +6,6 @@ const user = JSON.parse(localStorage.getItem('user'))
 
 const initialState = {
     user: user ? user : null,
-    token: user && user.token,
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -81,7 +80,6 @@ export const authSlice = createSlice({
             //case for logout
             .addCase(logout.fulfilled, (state) => {
                 state.user = null
-                state.token = null
             })
 
 
@@ -94,7 +92,6 @@ export const authSlice = createSlice({
                 state.isLoading = false
                 state.isSuccess = true
                 state.user = action.payload
-                state.token = action.payload.token
             })
 
             .addCase(logInUser.rejected, (state, action) => {
@@ -102,7 +99,6 @@ export const authSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
                 state.user = null
-                state.token = null
             })
     },
 })

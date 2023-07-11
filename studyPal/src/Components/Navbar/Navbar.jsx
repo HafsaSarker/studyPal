@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../features/auth/authSlice'
 import {IoMdLogOut} from 'react-icons/io'
 import './Navbar.css'
-import { useNavigate } from 'react-router-dom'
+import bird from '../../../public/bird.png'
 
 export default function Navbar(){
     const dispatch = useDispatch()
@@ -25,7 +25,7 @@ export default function Navbar(){
         <nav className='navbar'>
             <div className="nav-left">
                 <h1>StudyPal</h1> 
-                <img className='logo' src='./bird.png' />
+                <img className='logo' src={bird} />
             </div>
             {user && 
             <>

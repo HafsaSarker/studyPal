@@ -32,7 +32,7 @@ function Register() {
         }
         //if everything is ok, reset
         dispatch(reset())
-    }, [user, isError, isSuccess, message, navigate, dispatch])
+    }, [user, isError, isSuccess, isLoading, dispatch, navigate])
 
     const handleChange = (e) => {
         const {name, value} = e.target

@@ -17,7 +17,7 @@ function Login() {
 
     const {email, password} = formData
 
-    const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
+    const {user, isError, isLoading, isSuccess, message} = useSelector((state) => state.auth)
 
     useEffect(() => {
         if(isError){
@@ -29,7 +29,7 @@ function Login() {
         }
         //if everything is ok, reset
         dispatch(reset())
-    }, [user, isError, isSuccess, message, navigate, dispatch])
+    }, [user, isError, isSuccess, isLoading, dispatch, navigate])
 
     const handleChange = (e) => {
         const {name, value} = e.target

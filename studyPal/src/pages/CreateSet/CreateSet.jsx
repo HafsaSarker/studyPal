@@ -15,7 +15,7 @@ export default function CreateSet() {
     const navigate =  useNavigate()
     const dispatch = useDispatch()
 
-    const { token } = useSelector((state) => state.auth)
+    const { user } = useSelector((state) => state.auth)
 
     const [formData, setFormData] = useState({
         setTitle:'',
@@ -82,7 +82,7 @@ export default function CreateSet() {
 
         const config = {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${user.token}`,
             },
         }
 
