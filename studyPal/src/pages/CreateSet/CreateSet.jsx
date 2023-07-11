@@ -6,15 +6,16 @@ import { AiFillDelete } from 'react-icons/ai'
 import { path } from '../../API_PATH'
 import SideNav from '../../Components/sideNav/SideNav'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { setIsCreated } from '../../features/notification/notifSlice'
-import { createStudySet } from '../../features/studySet/studySetSlice'
 import './CreateSet.css'
 
 
 export default function CreateSet() {
     const navigate =  useNavigate()
     const dispatch = useDispatch()
+
+    const { token } = useSelector((state) => state.auth)
 
     const [formData, setFormData] = useState({
         setTitle:'',
@@ -79,16 +80,19 @@ export default function CreateSet() {
             formData.img = undefined
         }
 
-        dispatch(createStudySet(formData))
-        dispatch(setIsCreated())
-        navigate('/dashboard')
-        // try {
-        //     await axios.post(`${path}/createSet`, formData)
-        //     dispatch(setIsCreated())
-        //     navigate('/dashboard')
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+        }
+
+        try {
+            await axios.post(`${path}/createSet`, formData, config)
+            dispatch(setIsCreated())
+            navigate('/dashboard')
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const deleteCard = (e) => {

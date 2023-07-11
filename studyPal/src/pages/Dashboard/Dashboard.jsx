@@ -11,19 +11,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../../Components/spinner/Spinner'
 
 export default function Dashboard () {
-    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    const { user } = useSelector((state) => state.auth)
+    const { token } = useSelector((state) => state.auth)
 
-    //if not user, redirect them
-    useEffect(() => {
-        if(!user){
-            navigate('/')
-        }
-    }, [user, navigate])
-
-    const [studySets, setStudySets] = useState([])
+    const [studySets, setStudySets] = useState(null)
 
     const { searchInput } = useSelector((state) => state.search)
 
@@ -31,18 +24,28 @@ export default function Dashboard () {
     const isEditState = useSelector((state) => state.notif.isEdited)
     const isDeleteState = useSelector((state) => state.notif.isDeleted) 
     const isCreateState = useSelector((state) => state.notif.isCreated)
-   
+    
     useEffect(() => {
         const fetchAllSets = async() => {
+            const config = {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+            }
+
             try {
-                const {data} = await axios.get(path)
+                const {data} = await axios.get(path, config)
                 setStudySets(data.allSets)
             } catch (error) {
                 console.log(error);
             }
         }
 
-        //fetchAllSets()
+        if(!token){
+            navigate('/')
+        }else {
+            fetchAllSets()
+        }
     },[])
 
     useEffect(() => {

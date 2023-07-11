@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { logInUser, reset } from '../../../features/auth/authSlice'
-import Spinner from '../../../Components/spinner/Spinner'
 import '../AuthModal.css'
 import '../AuthModal.css'
 
@@ -49,10 +48,6 @@ function Login() {
         }
 
         dispatch(logInUser(userData))
-    }
-
-    if(isLoading) {
-        return <Spinner />
     }
   return (
     <div>

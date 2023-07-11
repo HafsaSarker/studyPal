@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../features/auth/authSlice'
 import {IoMdLogOut} from 'react-icons/io'
 import './Navbar.css'
+import { useNavigate } from 'react-router-dom'
 
 export default function Navbar(){
     const dispatch = useDispatch()

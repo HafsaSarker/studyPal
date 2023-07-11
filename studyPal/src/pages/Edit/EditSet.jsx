@@ -7,7 +7,7 @@ import SideNav from '../../Components/sideNav/SideNav'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setIsEdited, setIsDeleted } from '../../features/notification/notifSlice'
 import './EditSet.css'
 
@@ -15,6 +15,12 @@ export default function EditSet() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const { token } = useSelector((state) => state.auth)
+    const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+    }
     const [formData, setFormData] = useState(null)
     const [cards, setCards] = useState(null)
     const {id} = useParams()
@@ -22,7 +28,7 @@ export default function EditSet() {
     useEffect(() => {
         const fetchStudySet = async() =>{
             try {
-                const {data} = await axios.get(`${path}/${id}`)
+                const {data} = await axios.get(`${path}/${id}`, config)
             
                 setFormData(data.studySet)
                 setCards(data.studySet.flashCards[0])
@@ -81,7 +87,7 @@ export default function EditSet() {
         formData.flashCards[0] = cards
         
         try {
-            await axios.patch(`${path}/${id}`, formData)
+            await axios.patch(`${path}/${id}`, formData, config)
             dispatch(setIsEdited())
             navigate('/dashboard')
         } catch (error) {
@@ -128,7 +134,7 @@ export default function EditSet() {
     //delete whole set
     const deleteStudySet = async() => {
         try {
-            await axios.delete(`${path}/${id}`)
+            await axios.delete(`${path}/${id}`, config)
             
             //set isDeleted state to alert user in dashboard
             dispatch(setIsDeleted())

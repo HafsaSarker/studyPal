@@ -27,7 +27,7 @@
 .study-set-btn-cont {
     display: flex;
     gap: 10px;
-    margin-top: 15px;
+    margin: 40px 0px;
 }
 
 .study-set-btn-cont button {

@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import SideNav from '../../Components/sideNav/SideNav'
 import axios from 'axios'
 import { path } from '../../API_PATH'
@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import FlashCard from '../../Components/flashcard/FlashCard'
 import Spinner from '../../Components/spinner/Spinner'
 import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill, BsShuffle } from 'react-icons/bs'
+import { useSelector } from 'react-redux'
 import './StudySet.css'
 
 export default function StudySet () {
@@ -14,11 +15,18 @@ export default function StudySet () {
     const [studySet, setStudySet] = useState(null)
     const [cards, setCards] = useState(null)
     const [cardIndx, setCardIndx] = useState(0)
+    const { token } = useSelector((state) => state.auth)
 
     useEffect(() => {
         const fetchStudySet = async() => {
+            const config = {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+            }
+
             try {
-                const {data} = await axios.get(`${path}/${id}`)
+                const {data} = await axios.get(`${path}/${id}`, config)
 
                 setStudySet(data.studySet)
                 setCards(data.studySet.flashCards[0])
@@ -48,7 +56,6 @@ export default function StudySet () {
     function shuffle() {
         const randNum = Math.floor(Math.random() * (cards.length));
 
-        console.log(randNum);
         setCardIndx(randNum);
     }
 
@@ -77,6 +84,8 @@ export default function StudySet () {
                                 <FlashCard
                                     term={cards[cardIndx].term}
                                     definition={cards[cardIndx].definition}
+                                    currCard={cards[cardIndx].cardNum}
+                                    size={cards.length}
                                 />
                             }
                             <div className="study-set-btn-cont">
@@ -99,9 +108,6 @@ export default function StudySet () {
                         </>
                     )
                 }
-
-                
-
             </div>
         </div>
     )
