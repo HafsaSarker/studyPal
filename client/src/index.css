@@ -1,19 +1,20 @@
-@import url('https://fonts.cdnfonts.com/css/torus');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import url("https://fonts.cdnfonts.com/css/torus");
 * {
   margin: 0;
   padding: 0;
-  font-family: Torus,Inter,"Helvetica Neue",Tahoma,Arial,"Hiragino Kaku Gothic ProN",Meiryo,"Microsoft YaHei","Apple SD Gothic Neo",sans-serif;
-}
+  font-family: Torus, Inter, "Helvetica Neue", Tahoma, Arial,
+    "Hiragino Kaku Gothic ProN", Meiryo, "Microsoft YaHei",
+    "Apple SD Gothic Neo", sans-serif;
+} */
 
-#root {
+/* #root {
   height: 100vh;
 }
 
 body {
   background-color: #f5f5f5;
-}
-
-
-
-
-
+} */
