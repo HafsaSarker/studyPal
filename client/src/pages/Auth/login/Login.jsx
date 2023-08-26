@@ -54,7 +54,7 @@ function Login() {
   return (
     <div>
       <form
-        className="m-11 flex h-80 w-96 flex-col items-center justify-center gap-2 rounded-sm px-5 py-3 shadow-md"
+        className="m-11 flex h-96 w-96 flex-col items-center justify-center gap-2 rounded-sm px-5 py-3 shadow-md"
         onSubmit={loginFormSubmit}
       >
         <h2 className="mb-5 text-xl font-semibold text-light-blue">
@@ -63,7 +63,7 @@ function Login() {
         <label className="flex flex-col text-xs">
           EMAIL
           <input
-            className="rounded-md border border-black px-0.5 py-1"
+            className="rounded-md border border-black px-0.5 py-1 outline-none focus:outline-none"
             type="email"
             name="email"
             onChange={handleChange}
@@ -72,7 +72,7 @@ function Login() {
         <label className="flex flex-col text-xs">
           PASSWORD
           <input
-            className="rounded-md border border-black px-0.5 py-1"
+            className="rounded-md border border-black px-0.5 py-1 outline-none focus:outline-none"
             type="password"
             name="password"
             onChange={handleChange}
