@@ -68,7 +68,7 @@ function Register() {
   return (
     <div>
       <form
-        className="m-11 flex h-96 w-96 flex-col items-center justify-center gap-2 rounded-sm px-5 py-3 shadow-md"
+        className="mt-9 mb-1 flex h-96 w-96 flex-col items-center justify-center gap-2 rounded-sm px-5 py-3 shadow-md"
         onSubmit={createAccount}
       >
         <h2 className="mb-5 text-xl font-semibold text-light-blue">

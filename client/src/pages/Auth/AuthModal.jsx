@@ -3,32 +3,39 @@ import { SlNotebook } from "react-icons/sl";
 import "./AuthModal.css";
 import Register from "./register/Register";
 import Login from "./login/Login";
+import { useState } from "react";
 
-export default function HomePage({ logIn, setLogIn }) {
+export default function HomePage() {
+  const [logIn, setLogIn] = useState(true);
+
   function changeForms() {
     setLogIn((prevState) => !prevState);
   }
   return (
-    <div className="Home-Page">
-      <img className="bear" src="./createAcc.gif" />
-      <div className="intro">
+    // Home-Page
+    <div className="mt-2 flex flex-col justify-center items-center h-screen">
+      {/* bear */}
+      <img className="h-20 w-20 object-cover pt-15" src="./createAcc.gif" />
+      {/* intro */}
+      <div className="bg-light-green flex justify-center items-center gap-12 rounded-full py-2 px-12 text-dark-green">
         <h4>
           Create
-          <span className="icon">
+          {/* icon */}
+          <span className="icon text-sm border-2 border-dark-green bg-dark-green rounded-full p-1 flex items-center justify-center text-neutral-100">
             <MdLaptopMac />
           </span>
         </h4>
 
         <h4>
           Study
-          <span className="icon">
+          <span className="icon text-sm border-2 border-dark-green bg-dark-green rounded-full p-1 flex items-center justify-center text-neutral-100">
             <MdOutlineCreate />
           </span>
         </h4>
 
         <h4>
           Learn
-          <span className="icon">
+          <span className="icon text-sm border-2 border-dark-green bg-dark-green rounded-full p-1 flex items-center justify-center text-neutral-100">
             <SlNotebook />
           </span>
         </h4>
