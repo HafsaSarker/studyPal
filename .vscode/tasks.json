@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Server Build",
+      "icon": { "id": "settings-gear", "color": "terminal.ansiCyan" },
+      "type": "shell",
+      "command": "npm start",
+
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "panel": "new"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+
+      "options": {
+        "cwd": "server"
+      }
+    },
+    {
+      "label": "Client Build",
+      "icon": { "id": "device-desktop", "color": "terminal.ansiYellow" },
+      "type": "shell",
+      "command": "npm run dev",
+
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "panel": "new"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+
+      "options": {
+        "cwd": "client"
+      }
+    }
+  ]
+}
