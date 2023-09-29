@@ -65,8 +65,8 @@ function Register() {
         className="mb-1 mt-9 flex h-96 w-96 flex-col items-center justify-center gap-2 rounded-sm px-5 py-3 shadow-md"
         onSubmit={createAccount}
       >
-        <h2 className="mb-5 text-xl font-semibold text-light-blue">
-          Create an account
+        <h2 className="text-h2 mb-5 font-semibold text-light-blue">
+          Create an account :)
         </h2>
         <label className="flex flex-col text-xs">
           NAME

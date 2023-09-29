@@ -12,30 +12,27 @@ export default function HomePage() {
     setLogIn((prevState) => !prevState);
   }
   return (
-    // Home-Page
-    <div className="mt-2 flex flex-col justify-center items-center h-screen">
-      {/* bear */}
-      <img className="h-20 w-20 object-cover pt-15" src="./createAcc.gif" />
-      {/* intro */}
-      <div className="bg-light-green flex justify-center items-center gap-12 rounded-full py-2 px-12 text-dark-green">
+    <div className="mt-12 flex flex-col items-center justify-center ">
+      <img className="pt-15 h-20 w-20 object-cover" src="./createAcc.gif" />
+
+      <div className="flex items-center justify-center gap-12 rounded-full bg-light-green px-12 py-2 text-dark-green">
         <h4>
           Create
-          {/* icon */}
-          <span className="icon text-sm border-2 border-dark-green bg-dark-green rounded-full p-1 flex items-center justify-center text-neutral-100">
+          <span className="icon flex items-center justify-center rounded-full border-2 border-dark-green bg-dark-green p-1 text-sm text-neutral-100">
             <MdLaptopMac />
           </span>
         </h4>
 
         <h4>
           Study
-          <span className="icon text-sm border-2 border-dark-green bg-dark-green rounded-full p-1 flex items-center justify-center text-neutral-100">
+          <span className="icon flex items-center justify-center rounded-full border-2 border-dark-green bg-dark-green p-1 text-sm text-neutral-100">
             <MdOutlineCreate />
           </span>
         </h4>
 
         <h4>
           Learn
-          <span className="icon text-sm border-2 border-dark-green bg-dark-green rounded-full p-1 flex items-center justify-center text-neutral-100">
+          <span className="icon flex items-center justify-center rounded-full border-2 border-dark-green bg-dark-green p-1 text-sm text-neutral-100">
             <SlNotebook />
           </span>
         </h4>

@@ -56,7 +56,7 @@ function Login() {
         className="mb-1 mt-9 flex h-96 w-96 flex-col items-center justify-center gap-2 rounded-sm px-5 py-3 shadow-md"
         onSubmit={loginFormSubmit}
       >
-        <h2 className="mb-5 text-xl font-semibold text-light-blue">
+        <h2 className="text-h2 mb-5 font-semibold text-light-blue">
           Welcome back!
         </h2>
 
