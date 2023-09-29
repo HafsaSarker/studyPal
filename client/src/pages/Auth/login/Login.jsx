@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logInUser, reset } from "../../../features/auth/authSlice";
-import "../AuthModal.css";
-import "../AuthModal.css";
 
 function Login() {
   const dispatch = useDispatch();

@@ -2,7 +2,6 @@ import { searchReducer } from "../../features/search/searchSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../features/auth/authSlice";
 import { IoMdLogOut } from "react-icons/io";
-import "./Navbar.css";
 import bird from "../../../public/bird.png";
 
 export default function Navbar() {

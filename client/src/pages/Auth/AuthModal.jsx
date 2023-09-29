@@ -1,6 +1,5 @@
 import { MdOutlineCreate, MdLaptopMac } from "react-icons/md";
 import { SlNotebook } from "react-icons/sl";
-import "./AuthModal.css";
 import Register from "./register/Register";
 import Login from "./login/Login";
 import { useState } from "react";
