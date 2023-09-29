@@ -1,84 +1,86 @@
-import { Link, useNavigate } from 'react-router-dom'
-import SideNav from '../../Components/sideNav/SideNav'
-import axios from 'axios'
-import { path } from '../../API_PATH'
-import Card from '../../Components/Card/Card'
-import './Dashboard.css'
-import { toast } from 'react-toastify'
-import { useEffect, useState } from 'react'
-import { resetNotif } from '../../features/notification/notifSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import Spinner from '../../Components/spinner/Spinner'
+import { Link, useNavigate } from "react-router-dom";
+import SideNav from "../../Components/sideNav/SideNav";
+import axios from "axios";
+import { path } from "../../API_PATH";
+import Card from "../../Components/Card/Card";
+import "./Dashboard.css";
+import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { resetNotif } from "../../features/notification/notifSlice";
+import { useDispatch, useSelector } from "react-redux";
+import Spinner from "../../Components/spinner/Spinner";
 
-export default function Dashboard () {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+export default function Dashboard() {
+  // const navigate = useNavigate()
+  // const dispatch = useDispatch()
 
-    const { user } = useSelector((state) => state.auth)
+  // const { user } = useSelector((state) => state.auth)
 
-    const [studySets, setStudySets] = useState(null)
+  // const [studySets, setStudySets] = useState(null)
 
-    const { searchInput } = useSelector((state) => state.search)
+  // const { searchInput } = useSelector((state) => state.search)
 
-    //for sending alerts/messages to user
-    const isEditState = useSelector((state) => state.notif.isEdited)
-    const isDeleteState = useSelector((state) => state.notif.isDeleted) 
-    const isCreateState = useSelector((state) => state.notif.isCreated)
-    
-    useEffect(() => {
-        const fetchAllSets = async() => {
-            const config = {
-                headers: {
-                  Authorization: `Bearer ${user.token}`,
-                },
-            }
-            try {
-                const {data} = await axios.get(path, config)
-                setStudySets(data.allSets)
-            } catch (error) {
-                console.log(error);
-            }
-        }
+  // //for sending alerts/messages to user
+  // const isEditState = useSelector((state) => state.notif.isEdited)
+  // const isDeleteState = useSelector((state) => state.notif.isDeleted)
+  // const isCreateState = useSelector((state) => state.notif.isCreated)
 
-        if(!user){
-            navigate('/')
-        }else {
-            fetchAllSets()
-        }
-        fetchAllSets()
-    },[user, navigate])
+  // useEffect(() => {
+  //     const fetchAllSets = async() => {
+  //         const config = {
+  //             headers: {
+  //               Authorization: `Bearer ${user.token}`,
+  //             },
+  //         }
+  //         try {
+  //             const {data} = await axios.get(path, config)
+  //             setStudySets(data.allSets)
+  //         } catch (error) {
+  //             console.log(error);
+  //         }
+  //     }
 
-    useEffect(() => {
-        const sendNotif = () => {
-            let message = ''
+  //     if(!user){
+  //         navigate('/')
+  //     }else {
+  //         fetchAllSets()
+  //     }
+  //     fetchAllSets()
+  // },[user, navigate])
 
-            if(isEditState){
-                message = 'successfully updated'
-            }
-            else if(isDeleteState){
-                message = 'successfully deleted'
-            }
-            else if(isCreateState){
-                message = 'successfully created'
-            }
-            else{
-                message = null
-            }
-            message ? toast.success(message) : null
-        }     
-        sendNotif()
-        dispatch(resetNotif())
-    },[isEditState, isDeleteState, isCreateState, resetNotif])
+  // useEffect(() => {
+  //     const sendNotif = () => {
+  //         let message = ''
 
-    const filteredSets = (studySets && searchInput) && studySets.filter((item) => item.setTitle.toLowerCase().includes(searchInput.toLowerCase()))
+  //         if(isEditState){
+  //             message = 'successfully updated'
+  //         }
+  //         else if(isDeleteState){
+  //             message = 'successfully deleted'
+  //         }
+  //         else if(isCreateState){
+  //             message = 'successfully created'
+  //         }
+  //         else{
+  //             message = null
+  //         }
+  //         message ? toast.success(message) : null
+  //     }
+  //     sendNotif()
+  //     dispatch(resetNotif())
+  // },[isEditState, isDeleteState, isCreateState, resetNotif])
 
-    return (
-        <div className='dashboard'>
-            <div className="side-nav">
-                <SideNav />
-            </div>
-            
-            <div className="dashboard-main">
+  // const filteredSets = (studySets && searchInput) && studySets.filter((item) => item.setTitle.toLowerCase().includes(searchInput.toLowerCase()))
+
+  return (
+    <div className="dashboard">
+      <div className="side-nav">
+        <SideNav />
+      </div>
+
+      <h2>dashboard</h2>
+
+      {/* <div className="dashboard-main">
                 {
                     !studySets && 
                     <div className="spinner">
@@ -135,7 +137,7 @@ export default function Dashboard () {
                     </div>
                 }
                 
-            </div>
-        </div>
-    )
+            </div> */}
+    </div>
+  );
 }

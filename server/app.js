@@ -10,7 +10,6 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
-app.use(errorHandler);
 
 //test route
 app.get("/test", (req, res) => {
@@ -36,3 +35,5 @@ const bootApp = async () => {
 };
 
 bootApp();
+
+app.use(errorHandler);

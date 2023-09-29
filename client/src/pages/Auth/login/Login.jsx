@@ -17,7 +17,7 @@ function Login() {
 
   const { email, password } = formData;
 
-  const { user, isError, isLoading, isSuccess, message } = useSelector(
+  const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth,
   );
 
@@ -26,12 +26,11 @@ function Login() {
       toast.error(message);
     }
 
-    if (isSuccess || user) {
+    if (user) {
       navigate("/dashboard");
     }
-    //if everything is ok, reset
     dispatch(reset());
-  }, [user, isError, isSuccess, isLoading, dispatch, navigate]);
+  }, [user, isError, isSuccess, dispatch, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,12 +53,13 @@ function Login() {
   return (
     <div>
       <form
-        className="mt-9 mb-1 flex h-96 w-96 flex-col items-center justify-center gap-2 rounded-sm px-5 py-3 shadow-md"
+        className="mb-1 mt-9 flex h-96 w-96 flex-col items-center justify-center gap-2 rounded-sm px-5 py-3 shadow-md"
         onSubmit={loginFormSubmit}
       >
         <h2 className="mb-5 text-xl font-semibold text-light-blue">
           Welcome back!
         </h2>
+
         <label className="flex flex-col text-xs">
           EMAIL
           <input

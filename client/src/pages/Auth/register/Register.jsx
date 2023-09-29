@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// import { register, reset } from "../../../features/auth/authSlice";
-import Spinner from "../../../Components/spinner/Spinner";
+import { register, reset } from "../../../features/auth/authSlice";
 import "../AuthModal.css";
-import { register } from "../../../utils/auth/register";
 
 function Register() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -20,23 +18,21 @@ function Register() {
 
   const { name, email, password, confirmPass } = formData;
 
-  // const { user, isLoading, isError, isSuccess, message } = useSelector(
-  //   (state) => state.auth,
-  // );
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth,
+  );
 
-  //watch for changes in user, isError, etc...
-  // useEffect(() => {
-  //   if (isError) {
-  //     toast.error(message);
-  //   }
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
 
-  //   if (isSuccess || user) {
-  //     navigate("/dashboard");
-  //   }
-  //   //if everything is ok, reset
-  //   dispatch(reset());
-  // }, [isLoading]);
-  // user, isError, isSuccess, isLoading, dispatch, navigate
+    if (user) {
+      navigate("/dashboard");
+    }
+    //if everything is ok, reset
+    dispatch(reset());
+  }, [user, isError, isSuccess, isLoading, dispatch, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,19 +55,14 @@ function Register() {
         password,
       };
 
-      // dispatch(register(userData));
-      register(userData)      
+      dispatch(register(userData));
     }
   };
-
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
 
   return (
     <div>
       <form
-        className="mt-9 mb-1 flex h-96 w-96 flex-col items-center justify-center gap-2 rounded-sm px-5 py-3 shadow-md"
+        className="mb-1 mt-9 flex h-96 w-96 flex-col items-center justify-center gap-2 rounded-sm px-5 py-3 shadow-md"
         onSubmit={createAccount}
       >
         <h2 className="mb-5 text-xl font-semibold text-light-blue">
