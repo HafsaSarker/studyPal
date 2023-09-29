@@ -21,7 +21,7 @@ app.get("/test", (req, res) => {
 app.use("/api/v1/studySets", require("./routes/studySet"));
 app.use("/api/v1/users", require("./routes/user"));
 
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 const bootApp = async () => {
   try {
