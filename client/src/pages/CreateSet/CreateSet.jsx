@@ -8,7 +8,6 @@ import SideNav from "../../Components/sideNav/SideNav";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsCreated } from "../../features/notification/notifSlice";
-import "./CreateSet.css";
 
 export default function CreateSet() {
   const navigate = useNavigate();
