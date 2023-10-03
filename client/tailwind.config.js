@@ -12,6 +12,9 @@ export default {
         "hover-blue": "#79b5f1",
         "light-green": "#BAD097",
         "dark-green": "#2E4012",
+        "hover-light-green": "#506e20",
+        "hover-light-green2": "#b4c992",
+        "hover-dark-green": "#3b5218",
       },
     },
     fontSize: {
